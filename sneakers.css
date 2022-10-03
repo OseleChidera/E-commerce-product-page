@@ -126,7 +126,7 @@ ul>.nav-link:hover {
 }
 
 .cart-list {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: fit-content;
     max-height: 15rem;
     overflow-y: auto;
@@ -241,7 +241,7 @@ main>.column {
     grid-template-rows: 2fr 1fr;
 }
 
-.main-price {}
+/* .main-price {} */
 
 .main-price-discount {
     display: flex;

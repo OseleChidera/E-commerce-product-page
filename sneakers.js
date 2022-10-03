@@ -11,7 +11,6 @@ let finalQuantity = Number(counter_value.value);
 let cartIcon = document.getElementById("cart-icon-main");
 let allDeleteButtons = document.getElementsByClassName("item");
 let counterValue = 0;
-let cartArray = [];
 
 let productObject = {
     productName: productMainName,
@@ -60,6 +59,8 @@ function createCartItems(cartList) {
     }
 }
 
+
+let cartArray = [];
 //cart item templates make use of the data displayed on the screen to create another element item
 AddToCartBtn.addEventListener("click", function addItemsToCart() {
     let item = '<div class="item">' +
@@ -70,12 +71,23 @@ AddToCartBtn.addEventListener("click", function addItemsToCart() {
         '</div>' +
         `<div class="delete-div"><img src='icon-delete.svg' alt="delete" srcset="" class="delete"></div>` +
         '</div>';
-    let cartArray = [];
+
     cartArray.push(item)
+    console.log(cartArray)
 
     createCartItems(cartArray)
+    deleteCartItem();
 })
 
+function deleteCartItem() {
+    let deleteButtons = document.querySelectorAll('.delete-div img.delete');
+
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', function(event) {
+            event.target.parentElement.parentElement.remove();
+        })
+    })
+}
 
 //by default the cart list is set to display none this toggles the display using the onclick event
 cartIcon.addEventListener("click", function showCartItems() {
