@@ -67,7 +67,7 @@ function createElements() {
             </div>
             <img src="icon-delete.svg" class="delete delete-div" alt="delete" srcset="">
             </div>`;
-        })
+        });
     document.getElementById("cart-list").innerHTML = cartArr;
 
 
