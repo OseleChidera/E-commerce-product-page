@@ -9,35 +9,24 @@ let productPrice = document.getElementById("main-price").innerHTML.replace("$", 
 let AddToCartBtn = document.getElementById("add-to-cart");
 let finalQuantity = Number(counter_value.value);
 let cartIcon = document.getElementById("cart-icon-main");
-let allDeleteButtons = document.getElementsByClassName("item");
 let counterValue = 0;
+let allDeleteButtons = document.getElementsByClassName("delete");
 let cartArray = [];
-
-let productObject = {
-    productName: productMainName,
-    productImage: main_image.getAttribute('src'),
-    productQuantity: 0,
-    productPrices: Number(productPrice)
-}
-
-
-//Counter functionality
+let index = 0
+    //Counter functionality
 add.addEventListener("click", function add() {
-    counterValue++
-    updateCounterValue()
+    counterValue += 1
+    counter_value.value = counterValue
+
 })
 sub.addEventListener("click", function subtract() {
     if (counterValue > 0) {
-        counterValue--
-        updateCounterValue()
+        counterValue -= 1
+        counter_value.value = counterValue
 
     } else console.error("cannot go backwards")
 })
 
-function updateCounterValue() {
-    counter_value.value = counterValue
-    productObject.productQuantity = counterValue;
-}
 
 
 //changing the src using preset images from the thumbnails
@@ -48,33 +37,47 @@ thumbnailArray.forEach((e) => {
     })
 })
 
-//this function checks the item quantity entered by the user . If  0 > it goes ahead and adds the element into the cart div 
-function createCartItems(cartList) {
+
+//using an array of objects to pass data using js template strings 
+AddToCartBtn.addEventListener("click", function addItemsToCart() {
     if (Number(counter_value.value) > 0) {
-        let m = cartList.forEach((e) => {
-            document.getElementById("cart-list").innerHTML += e;
+        cartArray.push({
+            productName: productMainName,
+            productImage: main_image.getAttribute('src'),
+            productQuantity: counter_value.value,
+            productPrices: Number(productPrice)
         })
+        createElements();
+        counter_value.classList.remove("red")
     } else {
         console.log("you have to have something in your cart");
-        counter_value.style.border = "1.5px solid red"
+        counter_value.classList.add("red")
     }
-}
-
-//cart item templates make use of the data displayed on the screen to create another element item
-AddToCartBtn.addEventListener("click", function addItemsToCart() {
-    let item = '<div class="item">' +
-        `<div><img src=${productObject.productImage} alt="" srcset="" class="item-picture"></div>` +
-        '<div class="item-description">' +
-        `<h2 class="product-title" id="product-title">${productObject.productName}</h2>` +
-        `<h3 class="main-price" id="main-price-cart">$${productObject.productPrices} x ${productObject.productQuantity} = $${productObject.productPrices * productObject.productQuantity}</h3>` +
-        '</div>' +
-        `<div class="delete-div"><img src='icon-delete.svg' alt="delete" srcset="" class="delete"></div>` +
-        '</div>';
-    let cartArray = [];
-    cartArray.push(item)
-
-    createCartItems(cartArray)
+    console.log(cartArray);
 })
+
+
+function createElements() {
+    const cartArr = cartArray.map((eachItem) => {
+            return `<div class="item">
+            <div><img src=${eachItem.productImage} alt="" srcset="" class="item-picture"></div>
+            <div class="item-description">
+            <h2 class="product-title" id="product-title">${eachItem.productName}</h2>
+            <h3 class="main-price" id="main-price-cart">$${eachItem.productPrices} x ${eachItem.productQuantity} = $${eachItem.productPrices * Number(eachItem.productQuantity)}</h3>
+            </div>
+            <img src="icon-delete.svg" class="delete delete-div" alt="delete" srcset="">
+            </div>`;
+        })
+    document.getElementById("cart-list").innerHTML = cartArr;
+
+
+
+    document.querySelectorAll(".delete").forEach((delButton) => {
+        delButton.addEventListener('click', function print(e) {
+          console.log("a delete icon was clicked")
+        })
+    })
+}
 
 
 //by default the cart list is set to display none this toggles the display using the onclick event
@@ -85,3 +88,8 @@ cartIcon.addEventListener("click", function showCartItems() {
     } else wholeContainer.style.display = "none"
 
 })
+
+
+
+
+
