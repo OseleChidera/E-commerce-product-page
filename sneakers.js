@@ -13,6 +13,7 @@ let counterValue = 0;
 let allDeleteButtons = document.getElementsByClassName("delete");
 let cartArray = [];
 let index = 0
+let redBlock = document.querySelector(".cart-list")
     //Counter functionality
 add.addEventListener("click", function add() {
     counterValue += 1
@@ -47,7 +48,7 @@ AddToCartBtn.addEventListener("click", function addItemsToCart() {
             productQuantity: counter_value.value,
             productPrices: Number(productPrice)
         })
-        createElements();
+        createElements(cartArray);
         counter_value.classList.remove("red")
     } else {
         console.log("you have to have something in your cart");
@@ -57,27 +58,35 @@ AddToCartBtn.addEventListener("click", function addItemsToCart() {
 })
 
 
-function createElements() {
-    const cartArr = cartArray.map((eachItem) => {
-            return `<div class="item">
+function createElements(wholeCartArray) {
+    const cartArr = wholeCartArray.map((eachItem) => {
+        return `
+        <div class="item">
             <div><img src=${eachItem.productImage} alt="" srcset="" class="item-picture"></div>
             <div class="item-description">
             <h2 class="product-title" id="product-title">${eachItem.productName}</h2>
             <h3 class="main-price" id="main-price-cart">$${eachItem.productPrices} x ${eachItem.productQuantity} = $${eachItem.productPrices * Number(eachItem.productQuantity)}</h3>
             </div>
             <img src="icon-delete.svg" class="delete delete-div" alt="delete" srcset="">
-            </div>`;
-        });
-    document.getElementById("cart-list").innerHTML = cartArr;
+            </div>`
+    })
+    redBlock.innerHTML = cartArr;
 
 
-
-    document.querySelectorAll(".delete").forEach((delButton) => {
-        delButton.addEventListener('click', function print(e) {
-          console.log("a delete icon was clicked")
+    document.querySelectorAll(".delete").forEach((delButton, ) => {
+        delButton.addEventListener('click', function print(event, ) {
+            let l = [...document.querySelectorAll('.delete')].indexOf(event.target)
+            cartArr.splice(l, 1)
+            delButton.parentElement.remove()
+            console.table(cartArr, delButton);
+            // cartArray = cartArr;
         })
     })
 }
+
+
+// ========================================================================
+
 
 
 //by default the cart list is set to display none this toggles the display using the onclick event
@@ -88,8 +97,3 @@ cartIcon.addEventListener("click", function showCartItems() {
     } else wholeContainer.style.display = "none"
 
 })
-
-
-
-
-
