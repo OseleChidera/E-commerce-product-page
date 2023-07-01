@@ -99,6 +99,7 @@ AddToCartBtn.addEventListener("click", function addItemsToCart() {
 
     document.querySelectorAll(".delete").forEach((delButton) => {
         delButton.addEventListener('click', function print(event, ) {
+            console.log('delete button was clicked !!!')
             const delButton = this.parentElement;
             const updatedItems = [...cartItem].filter((item , index) => item.id !== delButton.id);
             cartParentElement.innerHTML = updatedItems;
