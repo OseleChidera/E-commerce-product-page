@@ -41,15 +41,12 @@ thumbnailArray.forEach((e) => {
 
 //using an array of objects to pass data using js template strings 
 AddToCartBtn.addEventListener("click", function addItemsToCart() {
-    if (Number(counter_value.value)) {
-        // cartArray.push({
-        //     productName: productMainName,
-        //     productImage: main_image.getAttribute('src'),
-        //     productQuantity: counter_value.value,
-        //     productPrices: Number(productPrice)
-        // })
-
-        cartArray.push(
+    if (!Number(counter_value.value)) {
+        console.log("you have to have something in your cart");
+        counter_value.classList.add("red")
+        return;
+    }
+    cartArray.push(
         `<div class="item" id=${index}>
         <div><img src=${main_image.getAttribute('src')} alt="" srcset="" class="item-picture"></div>
         <div class="item-description">
@@ -58,20 +55,10 @@ AddToCartBtn.addEventListener("click", function addItemsToCart() {
         </div>
         <img src="icon-delete.svg" class="delete delete-div" alt="delete" srcset="">
         </div>`)
+        counter_value.classList.remove("red")
 
         const jsArray = cartArray.from(jsxArray);
-        // createElements(jsArray);
-        jsArray.forEach((item , index)=>{
-            cartParentElement.appendChild(item);
-            })
-
-
-        counter_value.classList.remove("red")
-    } else {
-        console.log("you have to have something in your cart");
-        counter_value.classList.add("red")
-    }
-    console.log(cartArray);
+        jsArray.forEach((item , index)=>{cartParentElement.appendChild(item)})
 })
 
 
