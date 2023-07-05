@@ -9,57 +9,93 @@
     <title>Frontend Mentor | E-commerce product page</title>
 </head>
 <link rel="stylesheet" href="sneakers.css">
+<link rel="stylesheet" href="sneakersMobile.css">
 
 <body>
-    <div class="container">
-        <nav class="navbar">
-            <h2 class="sneakers">sneakers</h2>
+    <nav class="nav">
+       <div class="top">
+        <div class="left">
+            <div class="sneakers">sneakers</div>
             <ul id="nav-links">
-                <li class="nav-link">collection</li>
-                <li class="nav-link">men</li>
-                <li class="nav-link">women</li>
-                <li class="nav-link">about</li>
-                <li class="nav-link">contact</li>
+                <li class="nav-link"><div>collection</div></li>
+                <li class="nav-link"><div>men</div></li>
+                <li class="nav-link"><div>women</div></li>
+                <li class="nav-link"><div>about</div></li>
+                <li class="nav-link"><div>contact</div></li>
             </ul>
-            <div id="cart-icon">
-                <div class="cart">
-                    <img src="images\icon-cart.svg" alt="cart-icon" srcset="" id="cart-icon-main">
-                    <div class="cart-items">
-                        <p class="cart-title">cart</p>
-                        <hr>
-                        <div class="cart-list" id="cart-list">
-                            <!-- ======================================================================================================================================== -->
-                            <!-- <div class="item">
-                                <div><img src="images\image-product-1-thumbnail.jpg" alt="" srcset="" class="item-picture"></div>
-                                <div class="item-description">
-                                    <h2 class="product-title" id="product-title">Fall Limited Edition Sneakers</h2>
-                                    <h3 class="main-price" id="main-price-cart">125 x 3</h3>
-                                </div>
-                                <div class="delete"><img src="images\icon-delete.svg" alt="delete" srcset=""></div>
-                            </div> -->
-                            <!-- ======================================================================================================================================== -->
-
-                        </div>
-                        <button class="checkout">checkout</button>
-                    </div>
-                </div>
-
-                <img src="images\image-avatar.png" alt="user-profile" srcset="" id="user-icon">
+            <div class="toggle" id="toggle">
+                <input type="checkbox" id="burger-toggle" />
+                <label for="burger-toggle" class="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+        </div>
+        
+        </div>
+        <div class="right">
+            <div class="cart-div" id="cart-div">
+                <img id="cart-icon-main" src="images\icon-cart.svg" alt="cart-icon" srcset="">
             </div>
-        </nav>
+        
+            <div class="cart-floater-not-shown" id="cart-floater">
+                <p class="cart-title">cart</p>
+                <hr>
+                <div class="cart-list" id="cart-list">
+        
+                </div>
+                <button class="checkout">checkout</button>
+            </div>
+        
+            <div class="user-icon" id="user-icon">
+                <img src="images\image-avatar.png" alt="user-profile" srcset="" width="100%">
+            </div>
+        </div>
+       </div>
+    <div class="bottom" id="bottom">
+        <ul id="nav-links">
+            <li class="nav-link"><span>collection</span></li>
+            <li class="nav-link">men</li>
+            <li class="nav-link">women</li>
+            <li class="nav-link">about</li>
+            <li class="nav-link">contact</li>
+        </ul>
+    </div>
+    </nav>
         <main id="main-content">
             <div id="main-left" class="column">
-                <div class="product-main-image">
-                    <img src="images\image-product-1.jpg" alt="main-image" srcset="" id="main-image" class="m">
+                <div class="product-main-image" id="product-main-image">
+                    <img src="images\image-product-1.jpg" alt="main-image" srcset="" id="main-image" class="m" width='100%' height="100%">
                 </div>
-                <div class="thumbnails">
                     <ul id="thumbnail-lists" class="thumbnail-lists">
                         <li><img src="images\image-product-1-thumbnail.jpg" class="thumbnail" alt="product-thumbnail-one" srcset=""></li>
                         <li><img src="images\image-product-2-thumbnail.jpg" class="thumbnail" alt="product-thumbnail-two" srcset=""></li>
                         <li><img src="images\image-product-3-thumbnail.jpg" class="thumbnail" alt="product-thumbnail-three" srcset=""></li>
                         <li><img src="images\image-product-4-thumbnail.jpg" class="thumbnail" alt="product-thumbnail-four" srcset=""></li>
                     </ul>
-                </div>
+            </div>
+            <div class="" id="main-right-dialog">
+            <div class="dialog-container">
+            <button id="close-dialog">x</button>
+            <div id="main-left-popup" class="column">
+                <button class="prev" id="prev"><</button>
+                <div class="product-main-image" >
+                    <img src="images\image-product-1.jpg" alt="main-image" srcset="" id="main-image-popup" class="" width='100%'
+                        height="100%">
+                    </div>
+                    <button class="next" id="next">></button>
+                <ul id="thumbnail-lists" class="thumbnail-lists">
+                    <li><img src="images\image-product-1-thumbnail.jpg" class="popup-Thumbnail thumbnail-active" alt="product-thumbnail-one" srcset="">
+                    </li>
+                    <li><img src="images\image-product-2-thumbnail.jpg" class="popup-Thumbnail" alt="product-thumbnail-two" srcset="">
+                    </li>
+                    <li><img src="images\image-product-3-thumbnail.jpg" class="popup-Thumbnail" alt="product-thumbnail-three" srcset="">
+                    </li>
+                    <li><img src="images\image-product-4-thumbnail.jpg" class="popup-Thumbnail" alt="product-thumbnail-four" srcset="">
+                    </li>
+                </ul>
+            </div>
+            </div>
             </div>
             <div id="main-right" class="column">
                 <p class="company-name">sneaker company</p>
@@ -75,17 +111,16 @@
                 <span class="add-to-cart">
                     <div class="counter">
                         <button class="sub" id="sub">-</button>
-                        <input type="text" name="units" id="counter-value"type="number" placeholder="0" size="1">
+                        <input type="text" name="units" id="counter-value"type="number" placeholder="0" size="1" disabled>
                         <button class="add" id="add">+</button>
                     </div>
                     <button class="add-to-cart-btn" id="add-to-cart"><img src="images\icon-cart.svg" alt="cart-icon" srcset="" ><p class="add-to-cart">Add to cart</p></button>
                 </span>
             </div>
+           
         </main>
-    </div>
-    <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Osele Chidera Emmanuel</a>.
-    </div>
+        
+   
     <script src="sneakers.js"></script>
 </body>
 
